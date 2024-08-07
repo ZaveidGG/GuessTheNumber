@@ -21,15 +21,22 @@ def choose_Difficulty(diff):
     return lives
 
 def Higher_or_Lower(randNumber, guessNumber, lives):
+
     if randNumber > guessNumber:
         print("Too low.")
         lives -= 1
+        if lives == 0:
+            print("You have ran out of guesses. You lost!")
+            print(f"The answer was {randNumber}.")
         return lives
     elif randNumber < guessNumber:
         print("Too High.")
         lives -= 1
+        if lives == 0:
+            print("You have ran out of guesses. You lost!")
+            print(f"The answer was {randNumber}.")
         return lives
-    else:
+    elif randNumber == guessNumber:
         print(f"You have won. The answer is {randNumber}")
 
 print(logo)
@@ -41,8 +48,11 @@ randNumber = generate_Number()
 difficulty = input("Choose a difficulty. Type 'easy' or 'hard' \n")
 lives = choose_Difficulty(difficulty)
 
-while guessNumber != randNumber:
+
+
+while guessNumber != randNumber and lives != 0:
     print(f"You have {lives} attempts remaining to guess the number. ")
     guessNumber = int(input("Make a guess\n"))
     lives = Higher_or_Lower(randNumber, guessNumber, lives)
+
 
